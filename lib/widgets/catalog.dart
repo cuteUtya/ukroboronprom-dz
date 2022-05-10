@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ukroboronprom/data/weapon_data.dart';
+import 'package:ukroboronprom/main.dart';
 import 'package:ukroboronprom/widgets/weapon_page.dart';
 
 class Catalog extends StatelessWidget {
@@ -14,27 +15,32 @@ class Catalog extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> items = [];
 
-    for (int i = 0; i < weapons.length; i += 2) {
-      var f = weapons[i];
-      var s = i + 1 >= weapons.length ? null : weapons[i + 1];
+    Widget b(WeaponData w) => CatalogCard(
+          weaponData: w,
+          image: w.images[0],
+          title: w.name,
+          text: w.type,
+          width: MediaQuery.of(context).size.width / (isMobile ? 1 : 2),
+          height:
+              (MediaQuery.of(context).size.width / (isMobile ? 1 : 2)) * 3 / 4,
+        );
 
-      Widget b(WeaponData w) => CatalogCard(
-            weaponData: w,
-            image: w.images[0],
-            title: w.name,
-            text: w.type,
-            width: MediaQuery.of(context).size.width / 2,
-            height: (MediaQuery.of(context).size.width / 2) * 3 / 4,
-          );
+    if (isMobile) {
+      items = weapons.map((e) => b(e)).toList();
+    } else {
+      for (int i = 0; i < weapons.length; i += 2) {
+        var f = weapons[i];
+        var s = i + 1 >= weapons.length ? null : weapons[i + 1];
 
-      items.add(
-        Row(
-          children: [
-            b(f),
-            s == null ? const SizedBox() : b(s),
-          ],
-        ),
-      );
+        items.add(
+          Row(
+            children: [
+              b(f),
+              s == null ? const SizedBox() : b(s),
+            ],
+          ),
+        );
+      }
     }
 
     return Column(

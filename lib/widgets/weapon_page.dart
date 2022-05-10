@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ukroboronprom/data/weapon_data.dart';
+import 'package:ukroboronprom/main.dart';
 import 'package:ukroboronprom/widgets/carousel.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -35,12 +36,12 @@ class _WeaponPageState extends State<WeaponPage> {
 
   @override
   Widget build(BuildContext context) {
-    var galleryWidth = MediaQuery.of(context).size.width * 0.4;
+    var galleryWidth = MediaQuery.of(context).size.width * (isMobile ? 1 : 0.4);
     var galleryHeight = galleryWidth * 3 / 4;
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: isMobile ? 0 : 24),
           child: ListView(
             children: [
               const SizedBox(height: 12),
@@ -58,12 +59,15 @@ class _WeaponPageState extends State<WeaponPage> {
                   ),
                 ],
               ),
-              Text(
-                widget.weapon.name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.black,
+              Container(
+                margin: !isMobile ? null : const EdgeInsets.only(left: 12),
+                child: Text(
+                  widget.weapon.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               const SizedBox(height: 32),
@@ -73,7 +77,7 @@ class _WeaponPageState extends State<WeaponPage> {
                   Container(
                     width: galleryWidth,
                     height: galleryHeight,
-                    margin: const EdgeInsets.only(right: 24),
+                    margin: isMobile ? null : EdgeInsets.only(right: 24),
                     child: Carousel(
                       items: widget.weapon.images
                           .map(
@@ -87,27 +91,20 @@ class _WeaponPageState extends State<WeaponPage> {
                           .toList(),
                     ),
                   ),
-                  Flexible(
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Column(
-                        children: [
-                          const Text(
-                            "Характеристики",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: "Noto Sans",
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          _buildCharacteristics()
-                        ],
+                  if (!isMobile)
+                    Flexible(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: buildFullCharacteristics(),
                       ),
-                    ),
-                  )
+                    )
                 ],
               ),
+              if (isMobile)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: buildFullCharacteristics(),
+                ),
               const SizedBox(height: 20),
               if (widget.weapon.youtubeVideoId != null)
                 Container(
@@ -126,7 +123,8 @@ class _WeaponPageState extends State<WeaponPage> {
               if (widget.weapon.youtubeVideoId != null)
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.25,
+                    horizontal: MediaQuery.of(context).size.width *
+                        (isMobile ? 0.05 : 0.25),
                   ),
                   child: YoutubePlayerIFrame(
                     aspectRatio: 16 / 9,
@@ -138,6 +136,23 @@ class _WeaponPageState extends State<WeaponPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildFullCharacteristics() {
+    return Column(
+      children: [
+        const Text(
+          "Характеристики",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontFamily: "Noto Sans",
+          ),
+          textAlign: TextAlign.center,
+        ),
+        _buildCharacteristics()
+      ],
     );
   }
 

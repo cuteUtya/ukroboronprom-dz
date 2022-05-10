@@ -29,6 +29,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    _isMobile = size.height > size.width;
     return Scaffold(
       body: Center(
         child: ListView(
@@ -79,6 +81,10 @@ class Home extends StatelessWidget {
     );
   }
 }
+
+bool _isMobile = false;
+
+bool get isMobile => _isMobile;
 
 //thank https://stackoverflow.com/questions/67662141/flutter-how-to-hide-a-scrollbarthumb-in-scrollable-widgets-like-listview-build#:~:text=The%20easiest%20and%20quickest%20way,%2C%20child%3A%20...%20)
 class NoThumbScrollBehavior extends ScrollBehavior {

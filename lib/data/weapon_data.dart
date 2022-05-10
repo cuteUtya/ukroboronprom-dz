@@ -11,7 +11,7 @@ class WeaponData {
 
   final String name;
   final String type;
-  final WeaponCharacteristic? characteristic;
+  final WeaponCharacteristic characteristic;
   final String? youtubeVideoId;
   final List<ImageProvider> images;
 }
