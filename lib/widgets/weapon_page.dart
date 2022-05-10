@@ -1,14 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:ukroboronprom/data/weapon_data.dart';
+import 'package:ukroboronprom/database.dart';
 import 'package:ukroboronprom/widgets/carousel.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-class WeaponPage extends StatelessWidget {
+class WeaponPage extends StatefulWidget {
   const WeaponPage({
     Key? key,
     required this.weapon,
   }) : super(key: key);
 
   final WeaponData weapon;
+
+  @override
+  State<WeaponPage> createState() => _WeaponPageState();
+}
+
+class _WeaponPageState extends State<WeaponPage> {
+  late final YoutubePlayerController? _controller =
+      widget.weapon.youtubeVideoId == null
+          ? null
+          : YoutubePlayerController(
+              initialVideoId: widget.weapon.youtubeVideoId!,
+              params: const YoutubePlayerParams(
+                showControls: true,
+                showFullscreenButton: true,
+              ),
+            );
+
+  @override
+  void dispose() {
+    _controller?.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var galleryWidth = MediaQuery.of(context).size.width * 0.4;
@@ -17,7 +42,7 @@ class WeaponPage extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          child: Column(
+          child: ListView(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -34,7 +59,7 @@ class WeaponPage extends StatelessWidget {
                 ],
               ),
               Text(
-                weapon.name,
+                widget.weapon.name,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -50,7 +75,7 @@ class WeaponPage extends StatelessWidget {
                     height: galleryHeight,
                     margin: const EdgeInsets.only(right: 24),
                     child: Carousel(
-                      items: weapon.images
+                      items: widget.weapon.images
                           .map(
                             (e) => (w) => Image(
                                   image: e,
@@ -82,7 +107,32 @@ class WeaponPage extends StatelessWidget {
                     ),
                   )
                 ],
-              )
+              ),
+              const SizedBox(height: 20),
+              if (widget.weapon.youtubeVideoId != null)
+                Container(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  child: const Text(
+                    "Відео огляд",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: "Noto Sans",
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              if (widget.weapon.youtubeVideoId != null)
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.1,
+                  ),
+                  child: YoutubePlayerIFrame(
+                    aspectRatio: 16 / 9,
+                    controller: _controller!,
+                  ),
+                )
             ],
           ),
         ),
@@ -91,7 +141,7 @@ class WeaponPage extends StatelessWidget {
   }
 
   Widget _buildCharacteristics() => Column(
-        children: weapon.characteristic!.paragraphs
+        children: widget.weapon.characteristic!.paragraphs
             .map((e) => _buildCharacteristicsParagraph(e))
             .toList(),
       );

@@ -6,7 +6,6 @@ const weapons = [
     name: "РК-360МЦ «Нептун»",
     type: "Береговий мобільний ракетний комплекс",
     characteristic: null,
-    description: null,
     images: [
       AssetImage("neptun_tzm.jpg"),
       AssetImage("neptun_preview.jpg"),
@@ -15,6 +14,7 @@ const weapons = [
   WeaponData(
     name: "«Гюрза-М»",
     type: "Артилерійський катер",
+    youtubeVideoId: "I8IfsW5TbwY",
     characteristic: WeaponCharacteristic(paragraphs: [
       WeaponCharacteristicParagraph(
         name: "Габарити",
@@ -63,7 +63,6 @@ const weapons = [
         ],
       ),
     ]),
-    description: null,
     images: [
       AssetImage("Gyurza_1.jpg"),
       AssetImage("Gyurza.jpg"),
@@ -73,7 +72,6 @@ const weapons = [
     name: "БТР-4E",
     type: "Бронетранспортер",
     characteristic: null,
-    description: null,
     images: [
       AssetImage("btr4e.jpg"),
     ],
@@ -82,7 +80,6 @@ const weapons = [
     name: "«Дозор-Б»",
     type: "Бронетранспортер",
     characteristic: null,
-    description: null,
     images: [
       AssetImage("dozor_b.jpg"),
     ],
@@ -91,7 +88,6 @@ const weapons = [
     name: "«Стугна-П»",
     type: "Противотанковый ракетный комплекс",
     characteristic: null,
-    description: null,
     images: [
       AssetImage("stugna-p.webp"),
     ],
@@ -100,7 +96,6 @@ const weapons = [
     name: "M4 — WAC-47",
     type: "Штурмова гвинтівка",
     characteristic: null,
-    description: null,
     images: [
       AssetImage("m4.jpg"),
     ],

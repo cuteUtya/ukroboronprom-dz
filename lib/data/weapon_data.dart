@@ -5,16 +5,14 @@ class WeaponData {
     required this.name,
     required this.type,
     required this.characteristic,
-    required this.description,
     required this.images,
-    this.youtubeVideoLinks,
+    this.youtubeVideoId,
   });
 
   final String name;
   final String type;
   final WeaponCharacteristic? characteristic;
-  final WeaponDescription? description;
-  final List<String>? youtubeVideoLinks;
+  final String? youtubeVideoId;
   final List<ImageProvider> images;
 }
 
@@ -44,22 +42,4 @@ class WeaponCharacteristicItem {
 
   final String name;
   final String value;
-}
-
-class WeaponDescription {
-  const WeaponDescription({
-    required this.paragraphs,
-  });
-
-  final List<WeponDescriptionParagraph> paragraphs;
-}
-
-class WeponDescriptionParagraph {
-  const WeponDescriptionParagraph({
-    required this.title,
-    required this.text,
-  });
-
-  final String title;
-  final String text;
 }
