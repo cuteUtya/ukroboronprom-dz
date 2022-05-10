@@ -5,6 +5,7 @@ import 'package:ukroboronprom/database.dart';
 import 'package:ukroboronprom/widgets/catalog.dart';
 import 'package:ukroboronprom/widgets/hat.dart';
 import 'package:ukroboronprom/widgets/promo_carousel.dart';
+import 'package:ukroboronprom/widgets/smooth_scroll.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,8 +34,8 @@ class Home extends StatelessWidget {
     _isMobile = size.height > size.width;
     return Scaffold(
       body: Center(
-        child: ListView(
-          children: [
+        child: SmoothListView(
+          items: [
             const Hat(),
             const SizedBox(height: 24),
             SizedBox(

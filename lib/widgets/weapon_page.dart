@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ukroboronprom/data/weapon_data.dart';
 import 'package:ukroboronprom/main.dart';
 import 'package:ukroboronprom/widgets/carousel.dart';
+import 'package:ukroboronprom/widgets/smooth_scroll.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class WeaponPage extends StatefulWidget {
@@ -42,8 +43,8 @@ class _WeaponPageState extends State<WeaponPage> {
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: isMobile ? 0 : 24),
-          child: ListView(
-            children: [
+          child: SmoothListView(
+            items: [
               const SizedBox(height: 12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
