@@ -12,8 +12,8 @@ class WeaponData {
 
   final String name;
   final String type;
-  final WeaponCharacteristic characteristic;
-  final WeaponDescription description;
+  final WeaponCharacteristic? characteristic;
+  final WeaponDescription? description;
   final List<String>? youtubeVideoLinks;
   final List<ImageProvider> images;
 }

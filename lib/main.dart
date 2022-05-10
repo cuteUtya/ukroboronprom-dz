@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ukroboronprom/data/carousel_items.dart';
+import 'package:ukroboronprom/data/weapon_data.dart';
+import 'package:ukroboronprom/widgets/catalog.dart';
 import 'package:ukroboronprom/widgets/hat.dart';
 import 'package:ukroboronprom/widgets/promo_carousel.dart';
 
@@ -31,7 +33,7 @@ class Home extends StatelessWidget {
           children: [
             const Hat(),
             const SizedBox(height: 24),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               height: (MediaQuery.of(context).size.width) * 9 / 20,
               child: const PromoCarousel(
@@ -54,6 +56,78 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 24),
+            const Text(
+              "Модельний ряд",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontFamily: "Noto Sans",
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            const Catalog(
+              weapons: [
+                WeaponData(
+                  name: "РК-360МЦ «Нептун»",
+                  type: "Береговий мобільний ракетний комплекс",
+                  characteristic: null,
+                  description: null,
+                  images: [
+                    AssetImage("neptun_tzm.jpg"),
+                    AssetImage("neptun_preview.jpg"),
+                  ],
+                ),
+                WeaponData(
+                  name: "«Гюрза-М»",
+                  type: "Артилерійський катер",
+                  characteristic: null,
+                  description: null,
+                  images: [
+                    AssetImage("Gyurza_1.jpg"),
+                    AssetImage("Gyurza.jpg"),
+                  ],
+                ),
+                WeaponData(
+                  name: "БТР-4E",
+                  type: "Бронетранспортер",
+                  characteristic: null,
+                  description: null,
+                  images: [
+                    AssetImage("btr4e.jpg"),
+                  ],
+                ),
+                WeaponData(
+                  name: "«Дозор-Б»",
+                  type: "Бронетранспортер",
+                  characteristic: null,
+                  description: null,
+                  images: [
+                    AssetImage("dozor_b.jpg"),
+                  ],
+                ),
+                WeaponData(
+                  name: "«Стугна-П»",
+                  type: "Противотанковый ракетный комплекс",
+                  characteristic: null,
+                  description: null,
+                  images: [
+                    AssetImage("stugna-p.webp"),
+                  ],
+                ),
+                WeaponData(
+                  name: "M4 — WAC-47",
+                  type: "Штурмова гвинтівка",
+                  characteristic: null,
+                  description: null,
+                  images: [
+                    AssetImage("m4.jpg"),
+                  ],
+                ),
+              ],
+            )
           ],
         ),
       ),
