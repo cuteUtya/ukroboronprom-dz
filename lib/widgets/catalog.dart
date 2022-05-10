@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ukroboronprom/data/weapon_data.dart';
+import 'package:ukroboronprom/widgets/weapon_page.dart';
 
 class Catalog extends StatelessWidget {
   const Catalog({
@@ -18,6 +19,7 @@ class Catalog extends StatelessWidget {
       var s = i + 1 >= weapons.length ? null : weapons[i + 1];
 
       Widget b(WeaponData w) => CatalogCard(
+            weaponData: w,
             image: w.images[0],
             title: w.name,
             text: w.type,
@@ -44,12 +46,14 @@ class Catalog extends StatelessWidget {
 class CatalogCard extends StatelessWidget {
   const CatalogCard({
     Key? key,
+    required this.weaponData,
     required this.image,
     required this.title,
     required this.text,
     this.width,
     this.height,
   }) : super(key: key);
+  final WeaponData weaponData;
   final ImageProvider image;
   final String title;
   final String text;
@@ -118,13 +122,25 @@ class CatalogCard extends StatelessWidget {
                 height: 48,
                 width: (width ?? 1000) * 0.33,
                 decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 5,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 5,
+                  ),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(4),
+                  ),
+                ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => WeaponPage(
+                          weapon: weaponData,
+                        ),
+                      ),
+                    );
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
                       Colors.transparent,
