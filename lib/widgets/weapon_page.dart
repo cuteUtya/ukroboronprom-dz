@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ukroboronprom/data/weapon_data.dart';
-import 'package:ukroboronprom/database.dart';
 import 'package:ukroboronprom/widgets/carousel.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -44,6 +43,7 @@ class _WeaponPageState extends State<WeaponPage> {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: ListView(
             children: [
+              const SizedBox(height: 12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -126,13 +126,14 @@ class _WeaponPageState extends State<WeaponPage> {
               if (widget.weapon.youtubeVideoId != null)
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.1,
+                    horizontal: MediaQuery.of(context).size.width * 0.25,
                   ),
                   child: YoutubePlayerIFrame(
                     aspectRatio: 16 / 9,
                     controller: _controller!,
                   ),
-                )
+                ),
+              const SizedBox(height: 12),
             ],
           ),
         ),
@@ -141,7 +142,7 @@ class _WeaponPageState extends State<WeaponPage> {
   }
 
   Widget _buildCharacteristics() => Column(
-        children: widget.weapon.characteristic!.paragraphs
+        children: widget.weapon.characteristic.paragraphs
             .map((e) => _buildCharacteristicsParagraph(e))
             .toList(),
       );

@@ -1,6 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:ukroboronprom/data/carousel_items.dart';
-import 'package:ukroboronprom/data/weapon_data.dart';
 import 'package:ukroboronprom/database.dart';
 import 'package:ukroboronprom/widgets/catalog.dart';
 import 'package:ukroboronprom/widgets/hat.dart';
@@ -16,9 +16,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      scrollBehavior: NoThumbScrollBehavior().copyWith(scrollbars: false),
       title: 'Ukroboronprom',
-      home: Home(),
+      home: const Home(),
     );
   }
 }
@@ -77,4 +78,14 @@ class Home extends StatelessWidget {
       ),
     );
   }
+}
+
+//thank https://stackoverflow.com/questions/67662141/flutter-how-to-hide-a-scrollbarthumb-in-scrollable-widgets-like-listview-build#:~:text=The%20easiest%20and%20quickest%20way,%2C%20child%3A%20...%20)
+class NoThumbScrollBehavior extends ScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.stylus,
+      };
 }

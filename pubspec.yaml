@@ -68,6 +68,10 @@ flutter:
     - dozor_b.jpg
     - stugna-p.webp
     - m4.jpg
+    - btr4.jfif
+    - dozor_b_1.jpg
+    - stugna-p.jpg
+    - m4_0.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
